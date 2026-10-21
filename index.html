@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101114">
+<title>NOIR IPTV — Reproductor</title>
+<style>
+:root{--bg:#08090d;--panel:#15171f;--panel2:#20232d;--line:#303440;--text:#f5f5f7;--muted:#a5a8b4;--accent:#e50914;--accent2:#ff3944;--danger:#ff777e;--ok:#70d7a0;--gold:#f2c078}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 75% -12%,#3c1017 0,transparent 35%),linear-gradient(180deg,#11131a 0,#08090d 420px);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #383b47;border-radius:8px;padding:10px 14px;background:#20232d;color:var(--text);transition:.18s}button:hover{border-color:#777b89;background:#2a2d38}button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:750}button.primary:hover{background:var(--accent2)}button.ghost{background:transparent}button.danger{color:var(--danger)}input,select{width:100%;background:#0e1016;border:1px solid #343744;border-radius:8px;padding:11px;color:var(--text);outline:none}input:focus,select:focus{border-color:var(--accent)}label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}.shell{max-width:1700px;margin:auto;padding:0 30px 28px}.top{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:22px;padding:14px 0;background:linear-gradient(180deg,#08090df5,#08090de8);backdrop-filter:blur(14px);border-bottom:1px solid #ffffff10}.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}.mark{width:39px;height:39px;border-radius:9px;background:linear-gradient(145deg,#ff3a44,#a30009);display:grid;place-items:center;color:white;font-weight:950;font-size:22px;box-shadow:0 5px 24px #e5091433}.brand h1{font-size:18px;letter-spacing:.14em;margin:0}.brand p{display:none}.topnav{display:flex;align-items:center;gap:6px;flex:1;min-width:0}.topnav button{background:transparent;border-color:transparent;padding:9px 12px;color:#d4d5db;font-size:13px;font-weight:700;white-space:nowrap}.topnav button.active,.topnav button:hover{color:#fff;background:#ffffff12;border-color:#ffffff12}.topnav button.active:after{content:'';display:block;height:2px;background:var(--accent);margin:5px auto -7px;width:22px}.topright{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0}.status{color:var(--muted);font-size:11px;max-width:160px}.hero{position:relative;min-height:300px;display:flex;align-items:center;margin:0 -30px 25px;padding:38px 30px;background:linear-gradient(90deg,#08090d 0%,#08090dcc 35%,#08090d22 100%),linear-gradient(0deg,#08090d 0%,transparent 50%),radial-gradient(ellipse at 80% 35%,#8b1823 0%,#3b111b 23%,#17111a 54%,#0a0b10 75%);overflow:hidden}.hero:after{content:'N';position:absolute;right:9%;top:-70px;font-size:400px;line-height:1;font-weight:1000;color:#ffffff06;pointer-events:none}.hero-content{position:relative;z-index:1;max-width:650px}.eyebrow{color:#ff7d84;font-size:11px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}.hero h2{font-size:clamp(34px,5vw,62px);line-height:.99;letter-spacing:-.04em;margin:12px 0}.hero p{color:#c0c1c9;margin:0;max-width:590px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:26px 0 14px}.section-title h2,.section-title h3{margin:0;font-size:clamp(19px,2.4vw,26px);letter-spacing:-.02em}.section-title p{margin:4px 0 0;color:var(--muted);font-size:12px}.section-title input{max-width:280px}.layout{display:block}.panel{background:rgba(21,23,31,.97);border:1px solid var(--line);border-radius:14px;padding:18px}.panel h3{margin:0 0 6px;font-size:16px}.sub{color:var(--muted);font-size:12px;margin:0 0 12px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tabs button{padding:8px 11px;font-size:13px}.tabs button.active{background:#43151a;border-color:#8c2028;color:#fff}.stack{display:grid;gap:8px}.source{display:flex;gap:9px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:11px;background:#14161d}.source.active{border-color:var(--accent);background:#281519}.source .sinfo{min-width:0;flex:1;cursor:pointer}.source strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}.source small{color:var(--muted);font-size:11px}.source .mini{padding:5px 8px;font-size:11px}.form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.note{border:1px solid #5b3035;background:#241519;color:#e9c4c8;border-radius:10px;padding:11px;font-size:12px;margin-top:13px}.notice{padding:12px;border-radius:10px;background:#1d2520;border:1px solid #344a3c;color:#c6f0d5;font-size:13px;margin:12px 0}.error{background:#2a1c1c;border-color:#593535;color:#ffcaca}.mainpanel{min-width:0}.player-wrap{margin:18px 0 26px}.player{background:#030304;border:1px solid #292b34;border-radius:13px;overflow:hidden;position:relative;aspect-ratio:16/9;display:grid;place-items:center;max-height:75vh}.player video{width:100%;height:100%;object-fit:contain;background:#030304}.player-empty{text-align:center;padding:24px;max-width:460px}.player-empty .playicon{font-size:44px;color:var(--accent)}.player-empty h3{margin:5px 0}.player-empty p{color:var(--muted);font-size:13px}.playerbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 2px 0}.now{min-width:0}.now strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now small{color:var(--muted)}.tools{display:flex;gap:7px;flex-wrap:wrap}.tools button{padding:8px 10px;font-size:12px}.contenthead{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:8px 0 12px}.contenthead h3{margin:0}.contenthead input{max-width:300px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}.card{min-width:0;border:1px solid #242631;background:#14161d;border-radius:9px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}.card:hover{transform:scale(1.035);border-color:#777;box-shadow:0 10px 30px #0009;z-index:1}.poster{aspect-ratio:2/3;background:linear-gradient(145deg,#3b2026,#15161c);display:grid;place-items:center;overflow:hidden;color:#c0a7a9;font-size:35px}.poster img{width:100%;height:100%;object-fit:cover}.cardinfo{padding:10px 11px 12px}.cardinfo strong{font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.cardinfo small{display:block;color:var(--muted);font-size:11px;margin-top:5px}.empty{padding:35px 18px;text-align:center;color:var(--muted);border:1px dashed #343744;border-radius:12px}.hidden{display:none!important}.foot{color:#747782;font-size:11px;margin-top:30px;text-align:center}.modalback{position:fixed;inset:0;background:#000c;backdrop-filter:blur(7px);display:grid;place-items:center;padding:18px;z-index:20}.modal{background:#171922;border:1px solid #3b3e4a;border-radius:16px;width:min(760px,100%);max-height:90vh;overflow:auto;padding:22px;box-shadow:0 30px 100px #000b}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:12px}.modalhead h3{margin:0}.filehint{color:var(--muted);font-size:12px;margin-top:7px}.spinner{display:inline-block;width:13px;height:13px;border:2px solid #666;border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.menu-tile{display:flex;align-items:center;gap:12px;text-align:left;padding:15px;background:#20232d;border:1px solid #353946;border-radius:11px}.menu-tile .tileicon{font-size:24px;width:34px;text-align:center}.menu-tile strong{display:block}.menu-tile small{display:block;color:var(--muted);font-size:11px;font-weight:400}.tester-progress{height:7px;border-radius:20px;background:#30333d;overflow:hidden;margin:12px 0}.tester-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#e50914,#ff6c73);transition:width .15s}.test-results{display:grid;gap:7px;max-height:280px;overflow:auto;margin-top:12px}.test-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:9px 11px;border:1px solid #303440;border-radius:8px;font-size:12px}.test-row small{display:block;color:var(--muted);overflow-wrap:anywhere}.pill{font-size:10px;font-weight:800;border-radius:20px;padding:4px 7px;align-self:center}.pill.ok{background:#183729;color:#91efb9}.pill.bad{background:#421b21;color:#ffabb1}.pill.unknown{background:#3c321b;color:#f8d994}@media(max-width:850px){.shell{padding:0 14px 22px}.top{gap:9px;flex-wrap:wrap;padding:10px 0}.brand h1{font-size:15px}.mark{width:34px;height:34px}.topnav{order:3;flex-basis:100%;overflow-x:auto;padding:0 0 3px}.topnav button{padding:8px 10px}.topright{margin-left:auto}.status{display:none}.hero{margin:0 -14px 20px;padding:30px 17px;min-height:250px}.hero:after{right:-3%;font-size:280px}.hero h2{font-size:38px}.grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:11px}.section-title{align-items:start;flex-direction:column}.section-title input{max-width:none}.menu-grid{grid-template-columns:1fr}.playerbar{align-items:start;flex-direction:column}}@media(min-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="brand"><div class="mark">N</div><div><h1>NOIR</h1><p>Tu centro multimedia</p></div></div>
+  <nav class="topnav" id="topnav" aria-label="Categorías principales"><button data-topkind="menu" id="mainMenuBtn">☰ Menú principal</button><button data-topkind="live" class="active">TV</button><button data-topkind="radio">Radio</button><button data-topkind="movie">Películas</button><button data-topkind="series">Series</button><button data-topkind="games">Juegos</button></nav>
+  <div class="topright"><button class="primary" id="addSourceTop">＋ Fuente</button><div class="status" id="privacyStatus">Biblioteca local</div></div>
+</header>
+
+<main class="mainpanel">
+ <section id="homeLibrary"><div class="section-title"><div><h2 id="libraryTitle">Explorá tu biblioteca</h2><p id="librarySubtitle">Tus contenidos aparecerán aquí cuando cargues una fuente.</p></div><input id="search" placeholder="Buscar canales o títulos…" aria-label="Buscar"></div>
+ <div class="tabs hidden" id="categoryTabs"><button data-kind="all" class="active">Todo</button><button data-kind="live">TV</button><button data-kind="radio">Radio</button><button data-kind="movie">Películas</button><button data-kind="series">Series</button><button data-kind="games">Juegos</button></div><div class="tabs hidden" id="subcategoryTabs" aria-label="Subcategorías"></div>
+ <div id="library" class="empty">Agregá una fuente M3U para empezar a explorar las portadas.</div></section>
+ <section id="playerSection" class="player-wrap hidden"><div class="section-title"><div><div class="eyebrow">Reproduciendo ahora</div><h2 id="nowTitle">Reproductor</h2><p id="nowMeta">Fuente seleccionada</p></div><button id="closePlayer">✕ Cerrar reproductor</button></div><div class="player"><video id="video" controls playsinline></video><div id="playerEmpty" class="player-empty hidden"><div class="playicon">▶</div><h3>Listo para reproducir</h3><p>Elegí contenido compatible para iniciar.</p></div></div><div class="playerbar"><div class="now"><small>La reproducción depende del formato, la autorización y las restricciones del servidor.</small></div><div class="tools"><button id="stopBtn">■ Detener</button><button id="fullscreenBtn">⛶ Pantalla completa</button></div></div></section>
+ <div id="sourceMessage"></div>
+</main>
+<div class="foot">NOIR IPTV · Tus fuentes se guardan localmente · Utilizá únicamente listas y transmisiones autorizadas.</div>
+</div>
+<input class="hidden" type="file" id="m3uFile" accept=".m3u,.m3u8,.txt,audio/x-mpegurl,application/vnd.apple.mpegurl">
+<div id="modalRoot"></div>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const STORE = 'noir_iptv_sources_v1';
+let sources = [], activeId = null, items = [], activeKind = 'all', activeSubcategory = 'all', hls = null, busy = false;
+try { sources = JSON.parse(localStorage.getItem(STORE) || '[]'); } catch { sources = []; }
+const safe = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const persist = () => { try { localStorage.setItem(STORE, JSON.stringify(sources)); } catch(e) { message('No se pudo guardar en el navegador. Puede estar lleno o bloqueado.', true); } };
+function message(txt, err=false){ $('sourceMessage').innerHTML = txt ? `<div class="notice ${err?'error':''}">${safe(txt)}</div>` : ''; }
+function modal(content){ $('modalRoot').innerHTML = `<div class="modalback" id="modalback"><div class="modal">${content}</div></div>`; $('modalback').addEventListener('click',e=>{if(e.target.id==='modalback')closeModal()}); }
+function closeModal(){ $('modalRoot').innerHTML=''; }
+function renderSources(){
+ const el=$('sources');
+ if(!el)return;
+ if(!sources.length){el.innerHTML='<div class="empty">Todavía no agregaste fuentes.</div>';return;}
+ el.innerHTML=sources.map(s=>`<div class="source ${s.id===activeId?'active':''}"><div class="sinfo" data-open="${safe(s.id)}"><strong>${safe(s.name)}</strong><small>${safe({m3u:'Lista M3U',xtream:'Xtream Codes',url:'URL directa'}[s.type]||s.type)} · ${safe(s.countLabel||'Sin cargar')}</small></div><button class="mini" data-edit="${safe(s.id)}" title="Editar">⚙</button><button class="mini danger" data-del="${safe(s.id)}" title="Eliminar">×</button></div>`).join('');
+ el.querySelectorAll('[data-open]').forEach(n=>n.onclick=()=>loadSource(n.dataset.open));
+ el.querySelectorAll('[data-edit]').forEach(n=>n.onclick=()=>editSource(n.dataset.edit));
+ el.querySelectorAll('[data-del]').forEach(n=>n.onclick=()=>deleteSource(n.dataset.del));
+}
+function sourceForm(s={}){
+ modal(`<div class="modalhead"><h3>${s.id?'Editar fuente':'Agregar una fuente'}</h3><button id="closeModal">✕</button></div>
+ <p class="sub">Las credenciales se guardan localmente en este navegador. No se envían a NOIR IPTV.</p>
+ <label>Nombre visible</label><input id="fName" placeholder="Ej. Mi servicio" value="${safe(s.name||'')}">
+ <label>Tipo de fuente</label><select id="fType"><option value="m3u">Lista M3U / M3U8</option><option value="xtream">Xtream Codes (API)</option><option value="url">URL directa de vídeo</option></select>
+ <div id="m3uFields"><label>URL de lista M3U</label><input id="fM3u" placeholder="https://servidor/lista.m3u" value="${safe(s.url||'')}"><div class="filehint">También podés importar un archivo .m3u local. Las URL remotas pueden estar bloqueadas por CORS.</div></div>
+ <div id="xtreamFields" class="hidden"><label>Servidor base (incluí http:// o https://)</label><input id="fServer" placeholder="https://servidor.example:8080" value="${safe(s.server||'')}"><label>Usuario</label><input id="fUser" autocomplete="off" value="${safe(s.username||'')}"><label>Contraseña</label><input id="fPass" type="password" autocomplete="new-password" value="${safe(s.password||'')}"><div class="filehint">Ingresá solo la dirección base del proveedor, por ejemplo https://servidor:puerto (sin usuario, contraseña ni parámetros). Si te dieron una URL que termina en /player_api.php, NOIR intentará normalizarla. El navegador puede bloquear algunos servidores por CORS.</div></div>
+ <div id="urlFields" class="hidden"><label>URL directa de vídeo</label><input id="fDirect" placeholder="https://servidor/stream.m3u8" value="${safe(s.url||'')}"></div>
+ <div class="form-actions"><button class="primary" id="saveSource">Guardar fuente</button><button id="testSource">Guardar y probar</button><button id="cancelModal">Cancelar</button></div>
+ <div id="formMessage"></div>`);
+ $('fType').value=s.type||'m3u';
+ const update=()=>{let t=$('fType').value;$('m3uFields').classList.toggle('hidden',t!=='m3u');$('xtreamFields').classList.toggle('hidden',t!=='xtream');$('urlFields').classList.toggle('hidden',t!=='url');};
+ $('fType').onchange=update;update();$('closeModal').onclick=closeModal;$('cancelModal').onclick=closeModal;
+ const save=async test=>{const type=$('fType').value, name=$('fName').value.trim()||'Mi fuente';let data={id:s.id||crypto.randomUUID(),name,type,createdAt:s.createdAt||Date.now()};
+ if(type==='m3u') data.url=$('fM3u').value.trim();
+ if(type==='url') data.url=$('fDirect').value.trim();
+ if(type==='xtream'){data.server=$('fServer').value.trim().replace(/\/+$/,'');data.username=$('fUser').value.trim();data.password=$('fPass').value;}
+ if((type==='m3u'||type==='url')&&!data.url){formMessage('Introducí una URL o importá un archivo M3U.',true);return;}
+ if(type==='xtream'&&(!data.server||!data.username||!data.password)){formMessage('Completá servidor, usuario y contraseña.',true);return;}
+ const ix=sources.findIndex(x=>x.id===data.id);if(ix>=0)sources[ix]=data;else sources.push(data);activeId=data.id;persist();renderSources();closeModal();message('Fuente guardada en este dispositivo.');if(test)await loadSource(data.id);
+ };
+ function formMessage(t,e){$('formMessage').innerHTML=`<div class="notice ${e?'error':''}">${safe(t)}</div>`}
+ $('saveSource').onclick=()=>save(false);$('testSource').onclick=()=>save(true);
+}
+function editSource(id){const s=sources.find(x=>x.id===id);if(s)sourceForm(s)}
+function deleteSource(id){const s=sources.find(x=>x.id===id);if(!s)return;if(!confirm(`¿Eliminar la fuente "${s.name}" de este dispositivo?`))return;sources=sources.filter(x=>x.id!==id);if(activeId===id){activeId=null;items=[];renderLibrary();}persist();renderSources();message('Fuente eliminada.');}
+function inferCategory(name,group,sourceName=''){
+ const raw=`${group||''} ${name||''} ${sourceName||''}`.toLowerCase();
+ const clean=raw.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ let type='TV';
+ if(/\b(radio|radios|fm\b|am\b|audio)\b/.test(clean))type='Radio';
+ else if(/\b(movie|movies|pelicula|peliculas|cine|cinema|film|films|vod)\b/.test(clean))type='Películas';
+ else if(/\b(series|serie|temporadas|episodios)\b/.test(clean))type='Series';
+ else if(/\b(juegos|games|gaming)\b/.test(clean))type='Juegos';
+ let sub='Sin clasificar';
+ const countryRules=[
+  [/argentina|argentinas|telefe|eltrece|canal 9|tv publica|c5n|tyc sports argentina/,'Argentina'],
+  [/espana|espanol|espanoles|spain|antena 3|telecinco|rtve|la sexta/,'España / Español'],
+  [/mexico|mexicana|televisa|azteca/,'México'],[/chile|chilena|tvn chile|mega chile/,'Chile'],
+  [/colombia|colombiana|caracol|\brcn\b/,'Colombia'],[/peru|peruana|america tv peru/,'Perú'],
+  [/uruguay|uruguaya/,'Uruguay'],[/venezuela|venezolana/,'Venezuela'],
+  [/united states|estados unidos|\busa\b|eeuu|american/,'Estados Unidos'],
+  [/latinoamerica|latinoamerica|latinos|latino|latina/,'Latinoamérica'],
+  [/international|internacional|world|global/,'Internacional']
+ ];
+ for(const [re,label] of countryRules){if(re.test(clean)){sub=label;break}}
+ if(sub==='Sin clasificar' && group && !/^(general|sin grupo|undefined|unknown)$/i.test(group.trim())){
+  const g=group.trim();
+  if(/sport|deporte|futbol|football|espn|fox sports/i.test(g))sub='Deportes';
+  else if(/news|noticia|cnn|bbc/i.test(g))sub='Noticias';
+  else if(/kids|infantil|children|cartoon|disney/i.test(g))sub='Infantiles';
+  else if(/music|musica|musical|vevo|mtv/i.test(g))sub='Música';
+  else sub=g;
+ }
+ if(type==='TV' && /sport|deporte|futbol|football|espn|fox sports/i.test(clean))sub='Deportes';
+ return `${type} | ${sub}`;
+}
+function kindFromCategory(group,title=''){
+ const c=`${group||''} ${title||''}`.toLowerCase();
+ if(/radio|music|musica|audio|\bfm\b/.test(c))return 'radio';
+ if(/movie|movies|pelicula|peliculas|cine|cinema|film|vod/.test(c))return 'movie';
+ if(/series|serie|temporadas|episodios/.test(c))return 'series';
+ if(/juegos|games|gaming/.test(c))return 'games';
+ return 'live';
+}
+function parseM3U(text,sourceName=''){
+ const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/);const out=[];let meta={};
+ for(const raw of lines){const line=raw.trim();if(!line)continue;if(line.startsWith('#EXTINF')){const comma=line.indexOf(',');const attrs=comma>=0?line.slice(8,comma):line.slice(8);const title=comma>=0?line.slice(comma+1).trim():'Canal';const get=(k)=>{const m=attrs.match(new RegExp(k+'="([^"]*)"','i'));return m?m[1]:''};const group=get('group-title');const kind=kindFromCategory(group,title);meta={name:title||'Sin título',logo:get('tvg-logo'),group,tvgId:get('tvg-id'),kind,category:inferCategory(title,group,sourceName)};}else if(!line.startsWith('#')){out.push({...meta,id:'m3u_'+out.length,url:line,kind:meta.kind||'live',sourceName});meta={};}}
+ return out;
+}
+async function fetchText(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error(`HTTP ${r.status} al consultar la fuente`);return await r.text();}
+async function loadSource(id){
+ const s=sources.find(x=>x.id===id);if(!s)return;activeId=id;renderSources();busy=true;message('Cargando fuente…');$('libraryTitle').textContent=s.name;$('library').innerHTML='<div class="empty"><span class="spinner"></span> Cargando contenido…</div>';
+ $('search').classList.remove('hidden');$('categoryTabs').classList.remove('hidden');items=[];
+ try{
+  if(s.type==='m3u'){
+   let txt;if(s.localText)txt=s.localText;else txt=await fetchText(s.url);
+   items=parseM3U(txt,s.name).map(x=>({...x,sourceId:s.id}));s.countLabel=`${items.length} elementos`;if(!items.length)throw new Error('La lista se descargó, pero no se encontraron entradas M3U válidas.');
+  }else if(s.type==='url'){
+   items=[{id:'direct_'+s.id,name:'Reproducir URL directa',url:s.url,kind:'live'}];s.countLabel='URL directa';
+  }else{
+   const api=buildXtreamApi(s);
+   const data=await fetchJSON(api);
+   if(data.user_info&&data.user_info.auth===0)throw new Error('El servidor rechazó las credenciales.');
+   const [liveCats,movieCats,seriesCats]=await Promise.allSettled([
+    fetchJSON(api+'&action=get_live_categories'),fetchJSON(api+'&action=get_vod_categories'),fetchJSON(api+'&action=get_series_categories')]);
+   const categoryMap={live:{},movie:{},series:{}};
+   for(const [kind,res] of [['live',liveCats],['movie',movieCats],['series',seriesCats]])if(res.status==='fulfilled'&&Array.isArray(res.value))for(const c of res.value)categoryMap[kind][String(c.category_id)]=c.category_name;
+   const results=await Promise.allSettled([
+    fetchJSON(api+'&action=get_live_streams'),fetchJSON(api+'&action=get_vod_streams'),fetchJSON(api+'&action=get_series')]);
+   const kinds=['live','movie','series'];
+   results.forEach((res,i)=>{if(res.status==='fulfilled'&&Array.isArray(res.value)){for(const x of res.value){const kind=kinds[i];items.push({id:`${kind}_${x.stream_id||x.series_id||items.length}`,name:x.name||'Sin título',kind,logo:x.stream_icon||x.cover||'',group:categoryMap[kind][String(x.category_id)]||({live:'TV en directo',movie:'Películas',series:'Series'}[kind]),streamId:x.stream_id,seriesId:x.series_id,container:x.container_extension||'mp4',sourceId:s.id});}}});
+   if(!items.length)throw new Error('La API respondió, pero no devolvió canales, películas ni series. Revisá que el servidor sea compatible con Xtream Codes.');
+   s.countLabel=`${items.length} elementos`;
+  }
+  persist();renderSources();renderLibrary();message(`Fuente cargada: ${items.length} elementos.`);
+ }catch(e){items=[];renderLibrary();message(`No se pudo cargar la fuente: ${e.message}. Verificá la dirección base, el puerto y que tu proveedor permita conexiones desde navegadores.`,true);}
+ finally{busy=false}
+}
+function buildXtreamApi(s){
+ let raw=(s.server||'').trim();
+ if(!/^https?:\/\//i.test(raw))raw='http://'+raw;
+ raw=raw.replace(/\s+/g,'').replace(/\/+$/,'');
+ let u;try{u=new URL(raw)}catch{throw new Error('La dirección del servidor no es válida. Usá http:// o https:// y revisá el puerto')}
+ // Si el usuario pegó la ruta de API completa, evitar duplicar player_api.php.
+ u.search='';u.hash='';
+ u.pathname=u.pathname.replace(/\/(player_api\.php|live\.php|get\.php)$/i,'').replace(/\/+$/,'');
+ const endpoint=u.origin+(u.pathname==='/'?'':u.pathname)+'/player_api.php';
+ return endpoint+'?username='+encodeURIComponent(s.username)+'&password='+encodeURIComponent(s.password);
+}
+async function fetchJSON(url){
+ let r;try{r=await fetch(url,{cache:'no-store',mode:'cors'})}catch(e){throw new Error('No se pudo conectar desde el navegador (posible CORS, DNS, TLS o servidor inaccesible). Probá la URL base y el protocolo con tu proveedor')}
+ const text=await r.text();
+ if(!r.ok){let detail=text.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,180);throw new Error(`HTTP ${r.status}${detail?': '+detail:''}`)}
+ try{return JSON.parse(text)}catch{throw new Error('El servidor respondió, pero no devolvió JSON. Puede no ser una API Xtream compatible')}
+}
+function renderLibrary(){
+ const q=$('search').value.toLowerCase().trim();let shown=items.filter(x=>(activeKind==='all'||x.kind===activeKind)&&(!q||`${x.name} ${x.group||''} ${x.category||''} ${x.sourceName||''}`.toLowerCase().includes(q)));const subcats=[...new Set(shown.map(x=>x.category||x.group).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));if(activeSubcategory!=='all')shown=shown.filter(x=>(x.category||x.group)===activeSubcategory);const subel=$('subcategoryTabs');if(subel){subel.classList.toggle('hidden',!subcats.length);subel.innerHTML=[`<button data-subcat="all" class="${activeSubcategory==='all'?'active':''}">Todas las subsecciones</button>`,...subcats.map(c=>`<button data-subcat="${safe(c)}" class="${activeSubcategory===c?'active':''}">${safe(c)}</button>`)].join('');subel.querySelectorAll('[data-subcat]').forEach(b=>b.onclick=()=>{activeSubcategory=b.dataset.subcat;renderLibrary()})}
+ $('libraryTitle').textContent=activeId?(sources.find(s=>s.id===activeId)?.name||'Biblioteca'):'Explorá tu biblioteca';
+ if(!shown.length){$('library').className='empty';$('library').textContent=items.length?'No hay resultados para este filtro.':'Agregá una fuente desde el menú principal o importá un archivo M3U para ver las portadas.';return}
+ $('library').className='grid';$('library').innerHTML=shown.slice(0,600).map(x=>`<article class="card" data-play="${safe(x.id)}"><div class="poster">${x.logo?`<img loading="lazy" src="${safe(x.logo)}" onerror="this.remove()">`:'▣'}</div><div class="cardinfo"><strong>${safe(x.name)}</strong><small>${safe(x.category||x.group||({live:'TV en directo',movie:'Película',series:'Serie'}[x.kind]||''))}</small></div></article>`).join('');
+ $('library').querySelectorAll('[data-play]').forEach(el=>el.onclick=()=>playItem(shown.find(x=>x.id===el.dataset.play)));
+}
+function buildStreamUrl(s,x){
+ if(x.url)return x.url;
+ const base=s.server.replace(/\/+$/,'');const auth=`username=${encodeURIComponent(s.username)}&password=${encodeURIComponent(s.password)}`;
+ if(x.kind==='live')return `${base}/live/${encodeURIComponent(s.username)}/${encodeURIComponent(s.password)}/${x.streamId}.${safeExt(x.container,'ts')}`;
+ if(x.kind==='movie')return `${base}/movie/${encodeURIComponent(s.username)}/${encodeURIComponent(s.password)}/${x.streamId}.${safeExt(x.container,'mp4')}`;
+ return null;
+}
+function safeExt(v,def){v=String(v||'').toLowerCase();return /^[a-z0-9]{1,8}$/.test(v)?v:def}
+async function playItem(x){
+ if(!x)return;const s=sources.find(y=>y.id===x.sourceId)||sources.find(y=>y.id===activeId);let url=x.url;
+ if(s?.type==='xtream'){
+  if(x.kind==='series'){message('La API de series suele requerir seleccionar temporada y episodio. Esa navegación se incorporará en una siguiente versión.',true);return}
+  url=buildStreamUrl(s,x);
+ }
+ if(!url){message('No se pudo construir una URL de reproducción para este elemento.',true);return}
+ playUrl(url,x.name,x.kind);
+}
+function playUrl(url,title='URL directa',kind='video'){
+ stopVideo();$('playerSection').classList.remove('hidden');$('playerEmpty').classList.add('hidden');$('video').classList.remove('hidden');$('nowTitle').textContent=title;$('nowMeta').textContent=kind==='live'?'TV en directo':kind==='radio'?'Radio':'Reproducción · fuente seleccionada';$('playerSection').scrollIntoView({behavior:'smooth',block:'start'});
+ const video=$('video');
+ try{
+  if(/\.m3u8($|\?)/i.test(url)&&window.Hls&&Hls.isSupported()){
+   hls=new Hls({enableWorker:true, manifestLoadingTimeOut:15000, fragLoadingTimeOut:20000, manifestLoadingMaxRetry:1, fragLoadingMaxRetry:1});
+   hls.loadSource(url);hls.attachMedia(video);
+   hls.on(Hls.Events.MANIFEST_PARSED,()=>{video.play().catch(()=>message('La lista HLS se abrió, pero el navegador no inició la reproducción automáticamente. Pulsá Play.',true));});
+   hls.on(Hls.Events.ERROR,(_,d)=>{
+    if(!d.fatal){
+      if(d.details==='fragLoadError'||d.details==='fragLoadTimeOut'){
+        const response=d.response||{};
+        const status=response.code||response.status||'sin código HTTP';
+        const target=response.url||d.frag?.url||'URL del segmento no disponible';
+        message(`HLS no pudo descargar un fragmento (${d.details}; HTTP ${status}). La lista puede cargar, pero el servidor no entrega el vídeo al navegador. Revisá CORS, autorización/token, URL del segmento o restricciones del proveedor. No se puede resolver CORS solo desde HTML.`,true);
+      }
+      return;
+    }
+    const response=d.response||{};
+    const status=response.code||response.status||'sin código HTTP';
+    if(d.type===Hls.ErrorTypes.NETWORK_ERROR){
+      message(`Error de red HLS (${d.details}; HTTP ${status}). El servidor o un segmento no respondió como se esperaba. Comprobá que la URL funcione en un reproductor autorizado y que permita peticiones desde el navegador.`,true);
+    }else if(d.type===Hls.ErrorTypes.MEDIA_ERROR){
+      message(`Error de medios HLS (${d.details}). El navegador recibió datos que no pudo reproducir. Puede ser un códec/formato no compatible.`,true);
+      try{hls.recoverMediaError()}catch{}
+    }else{
+      message(`Error HLS irrecuperable (${d.details||d.type}; HTTP ${status}).`,true);
+    }
+   });
+  }
+  else{
+   video.src=url;
+   video.play().catch(e=>message(`El navegador no pudo iniciar la reproducción (${e.message}). Para HLS, probá Chrome/Edge con HLS.js; Safari puede reproducir HLS nativo. Revisá también CORS y la autorización del servidor.`,true));
+  }
+ }catch(e){message(`No se pudo iniciar el reproductor: ${e.message}`,true)}
+}
+function stopVideo(){if(hls){hls.destroy();hls=null}const v=$('video');if(v){v.pause();v.removeAttribute('src');v.load();v.classList.add('hidden')}const empty=$('playerEmpty');if(empty)empty.classList.remove('hidden')}
+let testRows=[], testRunning=false, testCancel=false;
+function openMainMenu(){modal(`<div class="modalhead"><div><div class="eyebrow">NOIR IPTV</div><h3>Menú principal</h3><p class="sub">Administrá tus fuentes y herramientas.</p></div><button id="closeModal">✕</button></div><div class="menu-grid"><button class="menu-tile" id="menuAdd"><span class="tileicon">＋</span><span><strong>Agregar fuente</strong><small>M3U, Xtream Codes o URL directa</small></span></button><button class="menu-tile" id="menuImport"><span class="tileicon">📂</span><span><strong>Importar archivo M3U</strong><small>Cargar una lista desde este dispositivo</small></span></button><button class="menu-tile" id="menuTester"><span class="tileicon">⌕</span><span><strong>Probador de listas M3U</strong><small>Detectar enlaces disponibles y exportar una lista limpia</small></span></button><button class="menu-tile" id="menuOrganizer"><span class="tileicon">▦</span><span><strong>Organizador de bibliotecas</strong><small>Combinar listas, clasificar por tipo y país, quitar duplicados y exportar</small></span></button><button class="menu-tile" id="menuSources"><span class="tileicon">▤</span><span><strong>Mis fuentes</strong><small>Ver, cargar, editar o eliminar bibliotecas</small></span></button><button class="menu-tile" id="menuPreview"><span class="tileicon">▶</span><span><strong>Vista previa / reproductor</strong><small>Abrir el reproductor al elegir contenido</small></span></button><button class="menu-tile" id="menuPrivacy"><span class="tileicon">⚙</span><span><strong>Privacidad y ayuda</strong><small>Cómo se guardan tus fuentes y límites de prueba</small></span></button></div>`);$('closeModal').onclick=closeModal;$('menuAdd').onclick=()=>sourceForm();$('menuImport').onclick=()=>{closeModal();importFile()};$('menuTester').onclick=openTester;$('menuOrganizer').onclick=openOrganizer;$('menuSources').onclick=()=>{closeModal();modal(`<div class="modalhead"><h3>Mis fuentes</h3><button id="closeModal">✕</button></div><div id="sources" class="stack"></div><div class="form-actions"><button class="primary" id="sourceAddModal">＋ Nueva fuente</button></div>`);$('closeModal').onclick=closeModal;$('sourceAddModal').onclick=()=>sourceForm();renderSources()};$('menuPreview').onclick=()=>{closeModal();$('playerSection').scrollIntoView({behavior:'smooth',block:'start'})};$('menuPrivacy').onclick=()=>modal(`<div class="modalhead"><h3>Privacidad y ayuda</h3><button id="closeModal">✕</button></div><p>NOIR guarda las fuentes en el almacenamiento local del navegador. No incluyas credenciales privadas en capturas ni compartas listas con acceso restringido.</p><p>El probador puede clasificar algunos enlaces como inconclusos cuando el servidor bloquea peticiones del navegador (CORS), exige autenticación o no admite comprobaciones simples. Para una verificación completa puede ser necesario un servicio de análisis autorizado.</p>`);}
+function openOrganizer(){
+ const eligible=sources.filter(s=>s.type==='m3u');
+ modal(`<div class="modalhead"><div><div class="eyebrow">Biblioteca inteligente</div><h3>Organizador de bibliotecas</h3><p class="sub">Las fuentes originales se conservan por separado. Seleccioná cuáles querés combinar.</p></div><button id="closeModal">✕</button></div>
+ <div class="form-actions"><button class="primary" id="orgSelectAll">Seleccionar todas</button><button id="orgSelectNone">Desmarcar todas</button><button id="orgAddFile">＋ Agregar otra lista</button></div>
+ <div id="orgSources" class="stack" style="margin-top:12px">${eligible.length?eligible.map(s=>`<label class="source"><input type="checkbox" class="org-check" value="${safe(s.id)}" checked style="width:auto"><span class="sinfo"><strong>${safe(s.name)}</strong><small>${safe(s.countLabel||'Lista M3U')} · fuente independiente</small></span></label>`).join(''):'<div class="empty">Todavía no hay listas M3U guardadas. Agregá o importá una primero.</div>'}</div>
+ <label>Nombre de la biblioteca combinada</label><input id="orgName" value="Mi biblioteca combinada" placeholder="Ej. Cine y TV">
+ <div class="note">Se normalizan categorías como TV, Radio, Películas y Series, con subsecciones por país, idioma o temática. Se eliminan únicamente URL exactamente duplicadas; las fuentes originales no se modifican.</div>
+ <div class="form-actions"><button class="primary" id="orgCombine" ${eligible.length<1?'disabled':''}>Combinar seleccionadas</button><button id="orgExport" ${eligible.length<1?'disabled':''}>Solo exportar M3U</button></div><div id="orgStatus"></div>`);
+ $('closeModal').onclick=closeModal;
+ $('orgSelectAll').onclick=()=>document.querySelectorAll('.org-check').forEach(x=>x.checked=true);
+ $('orgSelectNone').onclick=()=>document.querySelectorAll('.org-check').forEach(x=>x.checked=false);
+ $('orgAddFile').onclick=()=>{closeModal();importFile()};
+ $('orgCombine').onclick=()=>combineSelectedSources(true);
+ $('orgExport').onclick=()=>combineSelectedSources(false);
+}
+async function combineSelectedSources(saveAsSource){
+ const ids=[...document.querySelectorAll('.org-check:checked')].map(x=>x.value);if(!ids.length){$('orgStatus').innerHTML='<div class="notice error">Seleccioná al menos una lista.</div>';return}
+ const button=$('orgCombine');if(button)button.disabled=true;
+ $('orgStatus').innerHTML='<div class="notice"><span class="spinner"></span> Leyendo listas, clasificando y eliminando duplicados…</div>';
+ const combined=[];let failed=[];
+ for(const id of ids){const s=sources.find(x=>x.id===id);if(!s)continue;try{const txt=s.localText||await fetchText(s.url);combined.push(...parseM3U(txt,s.name).map(x=>({...x,sourceId:s.id,sourceName:s.name})));}catch(e){failed.push(`${s.name}: ${e.message}`)}}
+ const seen=new Set(),unique=[];for(const x of combined){const key=(x.url||'').trim();if(!/^https?:\/\//i.test(key)||seen.has(key))continue;seen.add(key);x.category=inferCategory(x.name,x.group,x.sourceName);x.group=x.category;unique.push(x)}
+ const body=['#EXTM3U',...unique.flatMap(x=>{const attrs=[];if(x.tvgId)attrs.push(`tvg-id="${String(x.tvgId).replace(/"/g,"'")}"`);if(x.logo)attrs.push(`tvg-logo="${String(x.logo).replace(/"/g,"'")}"`);attrs.push(`group-title="${String(x.category).replace(/"/g,"'")}"`);return [`#EXTINF:-1 ${attrs.join(' ')},${String(x.name||'Canal sin nombre').replace(/[\r\n]/g,' ')}`,x.url]})].join('\n');
+ const filename=(($('orgName')?.value||'Mi biblioteca combinada').trim().replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/\s+/g,'_')||'noir-biblioteca')+'.m3u';
+ if(saveAsSource){const id=crypto.randomUUID();const s={id,name:$('orgName')?.value.trim()||'Mi biblioteca combinada',type:'m3u',localText:body,countLabel:`${unique.length} enlaces únicos · ${ids.length} fuentes combinadas`,createdAt:Date.now(),combinedFrom:ids};sources.push(s);activeId=id;persist();renderSources();}
+ downloadText(body,filename,'audio/x-mpegurl');
+ const catCounts={};unique.forEach(x=>catCounts[x.category]=(catCounts[x.category]||0)+1);const topCats=Object.entries(catCounts).sort((a,b)=>b[1]-a[1]).slice(0,12).map(([k,v])=>`<div class="test-row"><strong>${safe(k)}</strong><span>${v.toLocaleString('es-AR')}</span></div>`).join('');
+ $('orgStatus').innerHTML=`<div class="notice">Listo: ${unique.length.toLocaleString('es-AR')} enlaces únicos; ${combined.length-unique.length} duplicados o entradas no HTTP(S) omitidos. ${saveAsSource?'La biblioteca combinada también quedó guardada como una fuente independiente.':'Se descargó el archivo sin guardar una fuente nueva.'}</div><h4>Resumen de categorías</h4><div class="test-results">${topCats}</div>${failed.length?`<div class="notice error">No se pudieron leer algunas fuentes: ${safe(failed.join(' · '))}</div>`:''}`;
+ if(button)button.disabled=false;
+}
+function openTester(){modal(`<div class="modalhead"><div><div class="eyebrow">Herramientas</div><h3>Probador de listas M3U</h3></div><button id="closeModal">✕</button></div><p class="sub">Cargá un archivo o pegá una URL M3U. Los enlaces se comprobarán en este navegador; CORS puede impedir una conclusión fiable.</p><label>Archivo M3U/M3U8</label><input id="testerFile" type="file" accept=".m3u,.m3u8,.txt"><label>O URL de la lista</label><input id="testerUrl" placeholder="https://servidor/lista.m3u"><div class="form-actions"><button class="primary" id="testerStart">Analizar lista</button><button id="testerCancel" disabled>Cancelar análisis</button></div><div id="testerStatus" class="notice hidden"></div><div class="tester-progress"><span id="testerBar"></span></div><div id="testerSummary" class="sub"></div><div id="testerResults" class="test-results"></div><div class="form-actions"><button class="primary" id="testerDownload" disabled>Descargar lista limpia (.m3u)</button><button id="testerKeep" disabled>Guardar canales válidos como fuente</button></div><p class="filehint">Los enlaces se consideran válidos si responden a una comprobación HTTP accesible. El navegador no siempre puede verificar la reproducción real. Los resultados inconclusos no se eliminan automáticamente.</p>`);$('closeModal').onclick=closeModal;$('testerStart').onclick=runPlaylistTest;$('testerCancel').onclick=()=>{testCancel=true;$('testerCancel').disabled=true};$('testerDownload').onclick=downloadCleanM3U;$('testerKeep').onclick=keepTestedSource;}
+async function runPlaylistTest(){if(testRunning)return;let text='';const file=$('testerFile').files?.[0],url=$('testerUrl').value.trim();try{if(file)text=await file.text();else if(url)text=await fetchText(url);else{testerNotice('Elegí un archivo o introducí la URL de una lista.',true);return}}catch(e){testerNotice(`No se pudo cargar la lista: ${e.message}. Si es una URL remota, puede ser CORS.`,true);return}testRows=parseM3U(text).map((x,i)=>({...x,originalIndex:i,status:'pending',reason:''}));if(!testRows.length){testerNotice('No se encontraron entradas M3U válidas.',true);return}testRunning=true;testCancel=false;$('testerStart').disabled=true;$('testerCancel').disabled=false;$('testerDownload').disabled=true;$('testerKeep').disabled=true;$('testerResults').innerHTML='';const total=testRows.length;let done=0;for(const row of testRows){if(testCancel){row.status='unknown';row.reason='Análisis cancelado';continue}const result=await checkStream(row.url);row.status=result.status;row.reason=result.reason;done++;$('testerBar').style.width=Math.round(done/total*100)+'%';$('testerSummary').textContent=`Analizados ${done} de ${total} · Disponibles: ${testRows.filter(x=>x.status==='ok').length} · Fallidos: ${testRows.filter(x=>x.status==='bad').length} · Inconclusos: ${testRows.filter(x=>x.status==='unknown').length}`;if(done%5===0||done===total)renderTestResults();}testRunning=false;$('testerStart').disabled=false;$('testerCancel').disabled=true;$('testerDownload').disabled=!testRows.some(x=>x.status==='ok'||x.status==='unknown');$('testerKeep').disabled=!testRows.some(x=>x.status==='ok');renderTestResults();testerNotice(testCancel?'Análisis cancelado. Los canales pendientes se conservan como inconclusos.':'Análisis finalizado. Solo se eliminarán de la exportación los canales marcados como fallidos; los inconclusos se conservan para evitar falsos positivos.',false);}
+function testerNotice(t,err){const el=$('testerStatus');el.textContent=t;el.classList.remove('hidden','error');if(err)el.classList.add('error')}
+async function checkStream(url){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),9000);try{let r=await fetch(url,{method:'GET',headers:{'Range':'bytes=0-0'},cache:'no-store',mode:'cors',signal:controller.signal});clearTimeout(timer);if(r.ok||r.status===206)return {status:'ok',reason:`HTTP ${r.status}`};if(r.status===401||r.status===403)return {status:'bad',reason:`HTTP ${r.status} · acceso denegado`};if(r.status===404||r.status===410)return {status:'bad',reason:`HTTP ${r.status} · no encontrado`};return {status:'unknown',reason:`HTTP ${r.status} · respuesta no concluyente`};}catch(e){clearTimeout(timer);if(e.name==='AbortError')return {status:'unknown',reason:'Tiempo de espera agotado'};return {status:'unknown',reason:'Bloqueado por CORS/red o protocolo no compatible'};}}
+function renderTestResults(){const el=$('testerResults');if(!el)return;const rows=testRows.slice(0,1000);el.innerHTML=rows.map((x,i)=>`<div class="test-row"><div><strong>${safe(x.name)}</strong><small>${safe(x.url)}</small><small>${safe(x.reason||'Pendiente')}</small></div><span class="pill ${x.status==='ok'?'ok':x.status==='bad'?'bad':'unknown'}">${x.status==='ok'?'DISPONIBLE':x.status==='bad'?'FALLIDO':x.status==='pending'?'PENDIENTE':'INCONCLUSO'}</span></div>`).join('');}
+function downloadCleanM3U(){const kept=testRows.filter(x=>x.status!=='bad');if(!kept.length){testerNotice('No hay canales para exportar.',true);return}const body=['#EXTM3U',...kept.flatMap(x=>{const attrs=[];if(x.tvgId)attrs.push(`tvg-id="${x.tvgId}"`);if(x.logo)attrs.push(`tvg-logo="${x.logo}"`);if(x.group)attrs.push(`group-title="${x.group}"`);return [`#EXTINF:-1 ${attrs.join(' ')},${x.name}`,x.url]})].join('\n');downloadText(body,'noir-lista-limpia.m3u','audio/x-mpegurl');testerNotice(`Lista exportada con ${kept.length} canales. Se excluyeron ${testRows.length-kept.length} fallidos; los inconclusos se conservaron.`,false);}
+function downloadText(text,filename,type){const blob=new Blob([text],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
+function keepTestedSource(){const valid=testRows.filter(x=>x.status==='ok');if(!valid.length)return;const text=['#EXTM3U',...valid.flatMap(x=>[`#EXTINF:-1${x.group?` group-title="${x.group}"`:''}${x.logo?` tvg-logo="${x.logo}"`:''},${x.name}`,x.url])].join('\n');const id=crypto.randomUUID();sources.push({id,name:'Lista limpia · '+new Date().toLocaleDateString('es-AR'),type:'m3u',localText:text,countLabel:`${valid.length} canales comprobados`});activeId=id;persist();renderSources();closeModal();message(`Se guardó una fuente local con ${valid.length} canales comprobados.`);}
+
+function importFile(){ $('m3uFile').click() }
+$('m3uFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;const text=await file.text();const id=crypto.randomUUID();sources.push({id,name:file.name.replace(/\.(m3u8?|txt)$/i,''),type:'m3u',localText:text,countLabel:'Archivo local'});activeId=id;persist();renderSources();await loadSource(id);e.target.value='';};
+$('addSourceTop').onclick=()=>sourceForm();$('mainMenuBtn').onclick=openMainMenu;$('closePlayer').onclick=()=>{stopVideo();$('playerSection').classList.add('hidden')};$('topnav').querySelectorAll('[data-topkind]').forEach(b=>b.onclick=()=>{const k=b.dataset.topkind;if(k==='menu'){openMainMenu();return}activeKind=k==='games'?'games':k;activeSubcategory='all';$('topnav').querySelectorAll('[data-topkind]').forEach(x=>x.classList.toggle('active',x===b));$('categoryTabs').classList.remove('hidden');$('categoryTabs').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.dataset.kind===activeKind));renderLibrary();$('homeLibrary').scrollIntoView({behavior:'smooth',block:'start'})});
+$('search').oninput=renderLibrary;$('categoryTabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{activeKind=b.dataset.kind;$('categoryTabs').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));activeSubcategory='all';renderLibrary()});
+$('stopBtn').onclick=()=>{stopVideo();$('nowTitle').textContent='Reproducción detenida';$('nowMeta').textContent='Elegí otro contenido para continuar'};$('fullscreenBtn').onclick=()=>{const p=$('video');if(p.requestFullscreen)p.requestFullscreen();else if(p.webkitEnterFullscreen)p.webkitEnterFullscreen()};
+$('video').addEventListener('error',()=>{const e=$('video').error;if(e)message(`Error de reproducción del navegador (código ${e.code}${e.message?': '+e.message:''}). Puede ser URL inaccesible, CORS, formato/códec no compatible o acceso denegado.`,true)});
+renderSources();if(sources.length){$('library').innerHTML='<div class="empty">Tenés fuentes guardadas. Abrí el menú principal y entrá en Mis fuentes para cargarlas.</div>'}
+})();
+</script>
+</body>
+</html>
